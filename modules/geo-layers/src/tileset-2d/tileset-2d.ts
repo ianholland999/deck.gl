@@ -307,12 +307,14 @@ export class Tileset2D {
       for (const [minX, minY, maxX, maxY] of boundsArr) {
         let overlaps;
         if ('west' in bbox) {
-          overlaps = bbox.west < maxX && bbox.east > minX && bbox.south < maxY && bbox.north > minY;
+          // overlaps = bbox.west < maxX && bbox.east > minX && bbox.south < maxY && bbox.north > minY;
+          overlaps = bbox.west < maxX || bbox.east > minX || bbox.south < maxY || bbox.north > minY;
         } else {
           // top/bottom could be swapped depending on the indexing system
           const y0 = Math.min(bbox.top, bbox.bottom);
           const y1 = Math.max(bbox.top, bbox.bottom);
-          overlaps = bbox.left < maxX && bbox.right > minX && y0 < maxY && y1 > minY;
+          // overlaps = bbox.left < maxX && bbox.right > minX && y0 < maxY && y1 > minY;
+          overlaps = bbox.left < maxX || bbox.right > minX || y0 < maxY || y1 > minY;
         }
         if (overlaps) {
           return true;
